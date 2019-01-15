@@ -40,6 +40,6 @@ app.get("/", (req, res) => {
 //Actual Routes
 app.use("/api/auth", auth);
 app.use("/api/profile", profile);
-app.use("/api/question", question);
+app.use("/api/forum", question);
 
 app.listen(port, () => console.log("Server is running....."));

@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
 });
 
 // @type    POST
-//@route    /api/questions/
+//@route    /api/forum/
 // @desc    route for submitting questions
 // @access  PRIVATE
 router.post(
@@ -42,7 +42,7 @@ router.post(
   }
 );
 // @type    POST
-//@route    /api/question/answers/:id
+//@route    /api/forum/answers/:id
 // @desc    route for submitting answers to questions
 // @access  PRIVATE
 router.post(
@@ -66,7 +66,7 @@ router.post(
   }
 );
 // @type    POST
-//@route    /api/question/upvote/:id
+//@route    /api/forum/upvote/:id
 // @desc    route for submitting upvote to questions(exactly)
 // @access  PRIVATE
 router.post(
@@ -91,6 +91,21 @@ router.post(
               .catch(error => console.log(error));
           })
           .catch(error => console.log(error));
+      })
+      .catch(error => console.log(error));
+  }
+);
+// @type    POST
+//@route    /api/forum/delete/:id
+// @desc    route for deleting questions(exactly)
+// @access  PRIVATE
+router.delete(
+  "/delete/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Question.findByIdAndRemove(req.params.id)
+      .then(question => {
+        res.json({ success: "question deleted" });
       })
       .catch(error => console.log(error));
   }
